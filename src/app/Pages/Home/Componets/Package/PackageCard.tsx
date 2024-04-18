@@ -27,8 +27,8 @@ export function UserCardImage() {
           Package
         </Text>
         <Grid>
-          {USER_CARD.map((item) => (
-            <GridCol span={4}>
+          {USER_CARD.map((item,i) => (
+            <GridCol span={4} key={i}>
               <Card
                 withBorder
                 padding="xl"
