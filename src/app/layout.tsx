@@ -5,7 +5,7 @@ import "@mantine/core/styles.css";
 import { MantineProvider, ColorSchemeScript, createTheme } from "@mantine/core";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { Navigation } from "@/Component/Navbar/Navigation";
+import { HeaderMegaMenu} from "@/Component/Navbar/Navigation";
 import { FooterLinks } from "@/Component/Footer/Footer";
 
 const theme = createTheme({
@@ -34,7 +34,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <MantineProvider theme={theme}>
-          <Navigation/>
+          <HeaderMegaMenu/>
           <>{children}</>
           <FooterLinks/>
         </MantineProvider>

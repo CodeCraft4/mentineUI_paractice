@@ -1,86 +1,202 @@
 "use client"
-
-import { Menu, Group, Center, Burger, Container, Title } from '@mantine/core';
+import {
+  HoverCard,
+  Group,
+  Button,
+  UnstyledButton,
+  Text,
+  SimpleGrid,
+  ThemeIcon,
+  Anchor,
+  Divider,
+  Center,
+  Box,
+  Burger,
+  Drawer,
+  Collapse,
+  ScrollArea,
+  rem,
+  useMantineTheme,
+} from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
-import { IconChevronDown } from '@tabler/icons-react';
+import {
+  IconNotification,
+  IconCode,
+  IconBook,
+  IconChartPie3,
+  IconFingerprint,
+  IconCoin,
+  IconChevronDown,
+  IconBrandMantine,
+} from '@tabler/icons-react';
 import classes from './Navbar.module.css';
-import { IconBrandMantine } from '@tabler/icons-react';
+import Link from 'next/link';
 
-
-const links = [
-  { link: '/', label: 'Home' },
+const mockdata = [
   {
-    link: '#1',
-    label: 'Learn',
-    links: [
-      { link: '/docs', label: 'Documentation' },
-      { link: '/resources', label: 'Resources' },
-      { link: '/community', label: 'Community' },
-      { link: '/blog', label: 'Blog' },
-    ],
+    icon: IconCode,
+    title: 'Open source',
+    description: 'This Pokémon’s cry is very loud and distracting',
   },
-  { link: '/Pages/About', label: 'About' },
-  { link: '/Pages/Pricing', label: 'Pricing' },
   {
-    link: '#2',
-    label: 'Support',
-    links: [
-      { link: '/faq', label: 'FAQ' },
-      { link: '/demo', label: 'Book a demo' },
-      { link: '/forums', label: 'Forums' },
-    ],
+    icon: IconCoin,
+    title: 'Free for everyone',
+    description: 'The fluid of Smeargle’s tail secretions changes',
+  },
+  {
+    icon: IconBook,
+    title: 'Documentation',
+    description: 'Yanma is capable of seeing 360 degrees without',
+  },
+  {
+    icon: IconFingerprint,
+    title: 'Security',
+    description: 'The shell’s rounded shape and the grooves on its.',
+  },
+  {
+    icon: IconChartPie3,
+    title: 'Analytics',
+    description: 'This Pokémon uses its flying ability to quickly chase',
+  },
+  {
+    icon: IconNotification,
+    title: 'Notifications',
+    description: 'Combusken battles with the intensely hot flames it spews',
   },
 ];
 
-export function Navigation() {
-  const [opened, { toggle }] = useDisclosure(false);
+export function HeaderMegaMenu() {
+  const [drawerOpened, { toggle: toggleDrawer, close: closeDrawer }] = useDisclosure(false);
+  const [linksOpened, { toggle: toggleLinks }] = useDisclosure(false);
+  const theme = useMantineTheme();
 
-  const items = links.map((link) => {
-    const menuItems = link.links?.map((item) => (
-      <Menu.Item key={item.link}>{item.label}</Menu.Item>
-    ));
-
-    if (menuItems) {
-      return (
-        <Menu key={link.label} trigger="hover" transitionProps={{ exitDuration: 0 }} withinPortal>
-          <Menu.Target>
-            <a
-              href={link.link}
-              className={classes.link}
-            >
-              <Center>
-                <span className={classes.linkLabel}>{link.label}</span>
-                <IconChevronDown size="0.9rem" stroke={1.5} />
-              </Center>
-            </a>
-          </Menu.Target>
-          <Menu.Dropdown>{menuItems}</Menu.Dropdown>
-        </Menu>
-      );
-    }
-
-    return (
-      <a
-        key={link.label}
-        href={link.link}
-        className={classes.link}
-      >
-        {link.label}
-      </a>
-    );
-  });
+  const links = mockdata.map((item) => (
+    <UnstyledButton className={classes.subLink} key={item.title}>
+      <Group wrap="nowrap" align="flex-start">
+        <ThemeIcon size={34} variant="default" radius="md">
+          <item.icon style={{ width: rem(22), height: rem(22) }} color={theme.colors.blue[6]} />
+        </ThemeIcon>
+        <div>
+          <Text size="sm" fw={500}>
+            {item.title}
+          </Text>
+          <Text size="xs" c="dimmed">
+            {item.description}
+          </Text>
+        </div>
+      </Group>
+    </UnstyledButton>
+  ));
 
   return (
-    <header className={classes.header}>
-      <Container size="md">
-        <div className={classes.inner}>
-           <IconBrandMantine size={40}/>
-          <Group gap={5} visibleFrom="sm">
-            {items}
+    <Box pos={'sticky'} top={0} style={{zIndex:999}}>
+      <header className={classes.header}>
+        <Group justify="space-around">
+          <IconBrandMantine size={50} />
+          <Group h="100%" gap={0} visibleFrom="sm">
+            <a href="/" className={classes.link}>
+              Home
+            </a>
+            <HoverCard width={600} position="bottom" radius="md" shadow="md" withinPortal>
+              <HoverCard.Target>
+                <a href="#" className={classes.link}>
+                  <Center inline>
+                    <Box component="span" mr={5}>
+                      Features
+                    </Box>
+                    <IconChevronDown
+                      style={{ width: rem(16), height: rem(16) }}
+                      color={theme.colors.blue[6]}
+                    />
+                  </Center>
+                </a>
+              </HoverCard.Target>
+
+              <HoverCard.Dropdown style={{ overflow: 'hidden' }}>
+                <Group justify="space-between" px="md">
+                  <Text fw={500}>Features</Text>
+                  <Anchor href="#" fz="xs">
+                    View all
+                  </Anchor>
+                </Group>
+
+                <Divider my="sm" />
+                 
+                <SimpleGrid cols={2} spacing={0}>
+                  {links}
+                </SimpleGrid>
+
+                <div className={classes.dropdownFooter}>
+                  <Group justify="space-between">
+                    <div>
+                      <Text fw={500} fz="sm">
+                        Get started
+                      </Text>
+                      <Text size="xs" c="dimmed">
+                        Their food sources have decreased, and their numbers
+                      </Text>
+                    </div>
+                    <Button variant="default">Get started</Button>
+                  </Group>
+                </div>
+              </HoverCard.Dropdown>
+            </HoverCard>
+            <Link href="/Pages/About" className={classes.link}>
+              About
+            </Link>
+            <Link href="#" className={classes.link}>
+              Blogs
+            </Link>
+            <Link href="/Pages/Contact" className={classes.link}>
+              Contact
+            </Link>
           </Group>
-          <Burger opened={opened} onClick={toggle} size="sm" hiddenFrom="sm" />
-        </div>
-      </Container>
-    </header>
+          <Burger opened={drawerOpened} onClick={toggleDrawer} hiddenFrom="sm" color='orange'/>
+        </Group>
+      </header>
+
+      <Drawer
+        opened={drawerOpened}
+        onClose={closeDrawer}
+        size="90%"
+        padding="md"
+        title="Navigation"
+        hiddenFrom="sm"
+        zIndex={1000000}
+      >
+        <ScrollArea h={`calc(100vh - ${rem(80)})`} mx="-md">
+          <Divider my="sm" />
+
+          <a href="#" className={classes.link}>
+            Home
+          </a>
+          <UnstyledButton className={classes.link} onClick={toggleLinks}>
+            <Center inline>
+              <Box component="span" mr={5}>
+                Features
+              </Box>
+              <IconChevronDown
+                style={{ width: rem(16), height: rem(16) }}
+                color={theme.colors.blue[6]}
+              />
+            </Center>
+          </UnstyledButton>
+          <Collapse in={linksOpened}>{links}</Collapse>
+          <a href="#" className={classes.link}>
+            Learn
+          </a>
+          <a href="#" className={classes.link}>
+            Academy
+          </a>
+
+          <Divider my="sm" />
+
+          <Group justify="center" grow pb="xl" px="md">
+            <Button variant="default">Log in</Button>
+            <Button>Sign up</Button>
+          </Group>
+        </ScrollArea>
+      </Drawer>
+    </Box>
   );
 }

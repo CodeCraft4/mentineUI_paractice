@@ -1,6 +1,6 @@
 import { Container, Title, Text, Button } from "@mantine/core";
-import classes from "./Header.module.css";
 import { IconBrandGithub, IconShoppingCart } from "@tabler/icons-react";
+import classes from "./Header.module.css";
 
 
 export function HeroImageRight() {
@@ -16,13 +16,14 @@ export function HeroImageRight() {
                 inherit
                 variant="gradient"
                 gradient={{ from: "pink", to: "yellow" }}
+                size="xl"
               >
                 fully featured
               </Text>{" "}
               React components library
             </Title>
 
-            <Text className={classes.description} mt={30}>
+            <Text className={classes.description} mt={30} >
               Build fully functional accessible web applications with ease –
               Mantine includes more than 100 customizable components and hooks
               to cover you in any situation. Lorem, ipsum dolor sit amet
@@ -30,18 +31,13 @@ export function HeroImageRight() {
               Laboriosam, ab praesentium tenetur vitae porro repellat expedita?
             </Text>
 
-            <div
-            style={{
-                display:'flex',
-                gap:15
-            }}
-            >
             <Button
               variant="gradient"
               gradient={{ from: "pink", to: "yellow" }}
               size="xl"
               className={classes.control}
               mt={40}
+              mx={14}
             >
               <IconShoppingCart/> Get started
             </Button>
@@ -54,7 +50,6 @@ export function HeroImageRight() {
             >
             <IconBrandGithub/>  Github
             </Button>
-            </div>
           </div>
         </div>
       </Container>

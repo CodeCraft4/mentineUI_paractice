@@ -1,9 +1,9 @@
 "use client"
 import React from 'react'
-import { HeroImageRight } from './Pages/Home/Componets/Header/HeaderArea'
 import { FeaturesCards } from './Pages/Home/Componets/MainSection/SectionCard'
 import { UserCardImage } from './Pages/Home/Componets/Package/PackageCard'
 import { Box } from '@mantine/core'
+import {HeroImageRight } from './Pages/Home/Componets/Header/HeaderArea'
 
 const page = () => {
   return (

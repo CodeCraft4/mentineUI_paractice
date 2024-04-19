@@ -71,7 +71,7 @@ import {
           hunger drives it to try biting a Steel-type Pokémon.
         </Text>
   
-        <SimpleGrid cols={{ base: 1, md: 3 }} spacing="xl" mt={50}>
+        <SimpleGrid cols={{ base: 1, md: 3,sm:2,xs:2 }} spacing="xl" mt={50}>
           {features}
         </SimpleGrid>
       </Container>
